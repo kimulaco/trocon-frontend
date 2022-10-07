@@ -1,15 +1,10 @@
-import { FC } from 'react'
-import Link from 'next/link'
+import React, { FC } from 'react'
+import { AppLayout } from '@/components/layout/AppLayout/'
 
 const IndexPage: FC = () => (
-  <div>
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">
-        <a>About</a>
-      </Link>
-    </p>
-  </div>
+  <AppLayout>
+    <h1>Hello Next.js</h1>
+  </AppLayout>
 )
 
 export default IndexPage
