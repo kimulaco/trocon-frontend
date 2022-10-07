@@ -17,5 +17,7 @@ module.exports = {
     'plugin:react/recommended',
     'prettier',
   ],
-  rules: {},
-};
+  rules: {
+    'no-console': [1],
+  },
+}
