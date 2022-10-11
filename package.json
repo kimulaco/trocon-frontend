@@ -1,5 +1,5 @@
 {
-  "name": "g-trophy-client",
+  "name": "trophy-comp-client",
   "private": true,
   "scripts": {
     "dev": "next",

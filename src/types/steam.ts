@@ -1,4 +1,4 @@
-export type Uset = {
+export type User = {
   steamId: string
   communityVisibilityState: number
   profileState: number
