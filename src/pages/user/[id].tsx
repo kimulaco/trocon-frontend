@@ -41,7 +41,13 @@ const UserPage: FC = () => {
 
   useEffect(() => {
     if (id && games.length > 0) {
-      getGameTrophy(queryToString(id), games[0].appId)
+      getGameTrophy(queryToString(id), [
+        games[0].appId,
+        games[1].appId,
+        games[2].appId,
+        games[3].appId,
+        games[4].appId,
+      ])
     }
   }, [id, games])
 

@@ -20,7 +20,7 @@ export type UseSteamProps = {
   games: Game[]
   isLoading: boolean
   getUser: (steamId: string) => Promise<void>
-  getGameTrophy: (steamId: string, appId: number) => Promise<void>
+  getGameTrophy: (steamId: string, appIds: number[]) => Promise<void>
 }
 
 const sortGames = (games: Game[]): Game[] => {
@@ -65,33 +65,35 @@ export const useSteam = (): UseSteamProps => {
   }, [isLoading, setUser, setGames, setIsLoading])
 
   const getGameTrophy = useMemo<UseSteamProps['getGameTrophy']>(() => {
-    return async (steamId: string, appId: number): Promise<void> => {
-      if (isLoading) {
+    return async (steamId: string, appIds: number[]): Promise<void> => {
+      if (isLoading || appIds.length <= 0) {
         return
       }
 
       const body = await typedFetch<GetSteamGameTrophyResponse>(
-        `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}/trophy?appid=${appId}`,
+        `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}/trophy?appid=${appIds.join(',')}`,
       )
-      const trophies = findGameTrophies(appId, body.trophies)
+      console.log(body)
+      const trophies = body.trophies
 
-      if (!trophies) {
+      if (trophies.length <= 0) {
         return
       }
 
       let isSet = false
       const _games = games.map((_game: Readonly<Game>): Game => {
-        if (
-          appId !== _game.appId ||
-          (typeof _game?.isLoadedTrophies === 'boolean' && !_game.isLoadedTrophies)
-        ) {
+        if (typeof _game?.isLoadedTrophies === 'boolean' && !_game.isLoadedTrophies) {
+          return _game
+        }
+        const trophy = findGameTrophies(_game.appId, trophies)
+        if (!trophy) {
           return _game
         }
         isSet = true
         return {
           ..._game,
           isLoadedTrophies: false,
-          trophies: trophies.trophies,
+          trophies: trophy.trophies,
         }
       })
 
