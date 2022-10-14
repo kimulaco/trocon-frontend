@@ -1,6 +1,6 @@
 import React, { memo, FC, ReactNode } from 'react'
-import { Box, Skeleton, Fade, ChakraProps, HeadingProps } from '@chakra-ui/react'
-import { GameViewMeta } from './Meta'
+import { Box, ChakraProps, HeadingProps } from '@chakra-ui/react'
+import { GameViewMeta } from './meta'
 import { GameViewHeader } from './header'
 import { Game } from '@/types/steam'
 

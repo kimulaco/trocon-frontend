@@ -43,10 +43,6 @@ const UserPage: FC = () => {
     if (id && games.length > 0) {
       getGameTrophy(queryToString(id), [
         games[0].appId,
-        games[1].appId,
-        games[2].appId,
-        games[3].appId,
-        games[4].appId,
       ])
     }
   }, [id, games])

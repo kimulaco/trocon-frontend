@@ -4,6 +4,11 @@ import { ChakraProvider } from '@chakra-ui/provider'
 import { theme } from '@chakra-ui/react'
 import '@/styles/variables.css'
 
+if (process.env.NODE_ENV === 'development') {
+  const MockServer = () => import('@/mock/worker')
+  MockServer()
+}
+
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <ChakraProvider theme={theme}>
