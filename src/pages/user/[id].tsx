@@ -1,6 +1,6 @@
 import React, { FC, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Heading, Grid, GridItem } from '@chakra-ui/react'
+import { Heading, Grid, GridItem } from '@/components/chakra/'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
@@ -58,11 +58,7 @@ const UserPage: FC = () => {
       </AppInner>
 
       <AppInner>
-        <Heading
-          mt={4}
-          mb={4}
-          fontSize='2xl'
-        >{`${user?.personaName ? `${user?.personaName}'s` : ''} games`}</Heading>
+        <Heading mt={4} mb={4} fontSize='2xl'>Games</Heading>
 
         <Grid
           templateColumns='repeat(1, 1fr)'

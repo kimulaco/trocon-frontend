@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react'
+import React, { memo, FC, useMemo } from 'react'
 import { Flex, Box, ChakraProps, Progress } from '@chakra-ui/react'
 import { Trophy } from '@/types/steam'
 
@@ -12,10 +12,10 @@ export type GameTrophyProgressProps = {
   chakra?: ChakraProps
 }
 
-export const GameTrophyProgress: FC<GameTrophyProgressProps> = ({
+export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function GameTrophyProgress({
   trophies = [],
   chakra = {},
-}) => {
+}: GameTrophyProgressProps) {
   const unlockedTrophies = useMemo<Trophy[]>(() => {
     return getUnlockedTrophies(trophies)
   }, [trophies])
@@ -48,4 +48,4 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = ({
       </Box>
     </Flex>
   )
-}
+})

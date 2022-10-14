@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { memo, FC, ReactNode } from 'react'
 import { Box, ChakraProps } from '@chakra-ui/react'
 
 export type AppInnerProps = {
@@ -6,7 +6,10 @@ export type AppInnerProps = {
   chakra?: ChakraProps
 }
 
-export const AppInner: FC<AppInnerProps> = ({ children, chakra }) => {
+export const AppInner: FC<AppInnerProps> = memo(function AppInner({
+  children,
+  chakra,
+}: AppInnerProps) {
   return (
     <Box
       maxW='var(--app-inner-max-width)'
@@ -18,4 +21,4 @@ export const AppInner: FC<AppInnerProps> = ({ children, chakra }) => {
       {children}
     </Box>
   )
-}
+})

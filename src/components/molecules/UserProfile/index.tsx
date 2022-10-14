@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { memo, FC } from 'react'
 import { Flex, Box, Link, Skeleton, ChakraProps } from '@chakra-ui/react'
 import { UserIcon } from '@/components/atoms/UserIcon/'
 import { User } from '@/types/steam'
@@ -9,11 +9,11 @@ export type UserProfileProps = {
   chakra?: ChakraProps
 }
 
-export const UserProfile: FC<UserProfileProps> = ({
+export const UserProfile: FC<UserProfileProps> = memo(function UserProfile ({
   user,
   isLoading = false,
   chakra = {},
-}) => {
+}: UserProfileProps) {
   return (
     <Flex
       flexDirection='column'
@@ -46,4 +46,4 @@ export const UserProfile: FC<UserProfileProps> = ({
       </Link>
     </Flex>
   )
-}
+})

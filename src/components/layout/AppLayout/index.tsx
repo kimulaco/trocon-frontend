@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from 'react'
+import React, { memo, FC, ReactNode } from 'react'
 import { Box, ChakraProps } from '@chakra-ui/react'
 
 export type AppLayoutProps = {
@@ -6,9 +6,12 @@ export type AppLayoutProps = {
   chakra?: ChakraProps
 }
 
-export const AppLayout: FC<AppLayoutProps> = ({ children, chakra }) => {
+export const AppLayout: FC<AppLayoutProps> = memo(function AppLayout({
+  children,
+  chakra,
+}: AppLayoutProps) {
   return <Box
     pb={8}
     {...chakra || {}}
   >{children}</Box>
-}
+})

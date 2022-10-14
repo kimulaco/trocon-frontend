@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { memo, FC } from 'react'
 import { Box, ChakraProps, Skeleton, SkeletonProps, Fade } from '@chakra-ui/react'
 
 export type UserIconProps = {
@@ -18,13 +18,13 @@ const skeletonStyles: SkeletonProps = {
   pointerEvents: 'none',
 }
 
-export const UserIcon: FC<UserIconProps> = ({
+export const UserIcon: FC<UserIconProps> = memo(function UserIcon({
   src = '',
   alt = '',
   size = '92px',
   isLoading = false,
   chakra = {},
-}) => {
+}: UserIconProps) {
   return (
     <Box
       w={size}
@@ -40,4 +40,4 @@ export const UserIcon: FC<UserIconProps> = ({
       <img src={src} alt={alt || ''} />
     </Box>
   )
-}
+})
