@@ -19,4 +19,21 @@ export type Game = {
   hasCommunityVisibleStats: boolean
   playtime: number
   rtimeLastPlayed: number
+  trophies?: Trophy[]
+  isLoadedTrophies?: boolean
+}
+
+export type Trophy = {
+  apiname: string
+  name: string
+  description: string
+  achieved: number
+  unlocktime: number
+}
+
+export type GameTrophy = {
+  success: boolean
+  appId: number
+  gameName: string
+  trophies: Trophy[]
 }

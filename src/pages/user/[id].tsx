@@ -5,6 +5,7 @@ import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
 import { GameView } from '@/components/molecules/GameView/'
+import { GameTrophyProgress } from '@/components/molecules/GameTrophyProgress/'
 import { useSteam } from '@/utils/useSteam'
 import { Game } from '@/types/steam'
 
@@ -18,7 +19,7 @@ const queryToString = (query: string | string[]): string => {
 const UserPage: FC = () => {
   const router = useRouter()
   const { id } = router.query
-  const { user, games, isLoading, getUser } = useSteam()
+  const { user, games, isLoading, getUser, getGameTrophy } = useSteam()
 
   const getSteamUser = async (id: string) => {
     if (!id) {
@@ -37,6 +38,12 @@ const UserPage: FC = () => {
       getSteamUser(queryToString(id))
     }
   }, [id])
+
+  useEffect(() => {
+    if (id && games.length > 0) {
+      getGameTrophy(queryToString(id), games[0].appId)
+    }
+  }, [id, games])
 
   return (
     <AppLayout>
@@ -60,7 +67,12 @@ const UserPage: FC = () => {
           {isLoading && [...Array(18)].map((_, i: number) => {
             return (
               <GridItem key={`GameViewSkeleton-${i}`}>
-                <GameView isLoading={true}></GameView>
+                <GameView
+                  isLoading={true}
+                  progress={
+                    <GameTrophyProgress isLoading={true} />
+                  }
+                />
               </GridItem>
             )
           })}
@@ -68,7 +80,18 @@ const UserPage: FC = () => {
           {!isLoading && games.map((game: Game, i: number) => {
             return (
               <GridItem key={`GameView-${i}`}>
-                <GameView game={game} isLoading={isLoading} />
+                <GameView
+                  rootTagName='section'
+                  game={game}
+                  isLoading={isLoading}
+                  progress={
+                    <GameTrophyProgress
+                      trophies={game.trophies || []}
+                      isLoading={!!game.isLoadedTrophies}
+                      chakra={{ mt: 2 }}
+                    />
+                  }
+                />
               </GridItem>
             )
           })}
