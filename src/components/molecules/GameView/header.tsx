@@ -1,5 +1,6 @@
 import React, { memo, FC } from 'react'
-import { Box, Skeleton, Fade } from '@chakra-ui/react'
+import { Fade } from '@chakra-ui/react'
+import { Box, Skeleton } from '@/components/chakra/'
 import { Game } from '@/types/steam'
 
 export type GameViewHeaderProps = {
@@ -26,6 +27,7 @@ export const GameViewHeader: FC<GameViewHeaderProps> = memo(function GameViewHea
           loading="lazy"
           style={{
             opacity: isLoading ? 0 : 1,
+            backgroundColor: 'var(--chakra-colors-gray-300)',
             display: 'block',
             width: '100%',
             height: 'auto',

@@ -1,5 +1,6 @@
 import React, { memo, FC } from 'react'
-import { Heading, Text, SkeletonText, HeadingProps } from '@chakra-ui/react'
+import { HeadingProps } from '@chakra-ui/react'
+import { Heading, Text, SkeletonText } from '@/components/chakra/'
 import { formatDateByUnixtime } from '@/utils/time'
 import { Game } from '@/types/steam'
 
@@ -33,7 +34,7 @@ export const GameViewMeta: FC<GameViewMetaProps> = memo(function GameViewMeta({
           }</Text>
         </> :
         <>
-          <SkeletonText noOfLines={1} mt={4}/>
+          <SkeletonText noOfLines={1} mt={4} />
         </>
       }
     </>

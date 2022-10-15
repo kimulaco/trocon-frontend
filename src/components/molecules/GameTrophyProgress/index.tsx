@@ -1,5 +1,6 @@
 import React, { memo, FC, useMemo } from 'react'
-import { Flex, Box, ChakraProps, Progress } from '@chakra-ui/react'
+import { ChakraProps } from '@chakra-ui/react'
+import { Box, Flex, Progress } from '@/components/chakra/'
 import { Trophy } from '@/types/steam'
 
 const getUnlockedTrophies = (trophies: Trophy[]): Trophy[] => {
@@ -36,10 +37,11 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function Gam
       <Progress
         w='100%'
         value={rate}
+        colorScheme={rate >= 100 ? 'green' : 'blue'}
       />
       <Box
         minW='104px'
-        ml='4'
+        ml='2'
         fontSize='sm'
         textAlign='right'
         flexShrink={0}

@@ -1,12 +1,13 @@
 import React, { FC, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Heading, Grid, GridItem } from '@/components/chakra/'
+import { Box, Heading, Grid, GridItem } from '@/components/chakra/'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
 import { GameView } from '@/components/molecules/GameView/'
 import { GameTrophyProgress } from '@/components/molecules/GameTrophyProgress/'
 import { useSteam } from '@/utils/useSteam'
+import { logger } from '@/utils/logger'
 import { Game } from '@/types/steam'
 
 const queryToString = (query: string | string[]): string => {
@@ -21,40 +22,41 @@ const UserPage: FC = () => {
   const { id } = router.query
   const { user, games, isLoading, getUser, getGameTrophy } = useSteam()
 
-  const getSteamUser = async (id: string) => {
+  useEffect(() => {
     if (!id) {
       return
     }
-
     try {
-      await getUser(id)
+      getUser(queryToString(id))
     } catch (error) {
-      console.error(error)
-    }
-  }
-
-  useEffect(() => {
-    if (id) {
-      getSteamUser(queryToString(id))
+      logger.error(error)
     }
   }, [id])
 
   useEffect(() => {
-    if (id && games.length > 0) {
+    if (!id || games.length <= 0) {
+      return
+    }
+    try {
       getGameTrophy(queryToString(id), [
         games[0].appId,
       ])
+    } catch (error) {
+      logger.error(error)
     }
-  }, [id, games])
+  }, [games])
 
   return (
     <AppLayout>
-      <AppInner>
+      <AppInner type='full'>
         <UserProfile user={user} isLoading={isLoading} />
       </AppInner>
 
       <AppInner>
-        <Heading mt={4} mb={4} fontSize='2xl'>Games</Heading>
+        <Heading mt={4} mb={4} fontSize='2xl'>
+          <Box as='span'>Games</Box>
+          <Box as='span'>{isLoading ? '' : ` (${games.length})`}</Box>
+        </Heading>
 
         <Grid
           templateColumns='repeat(1, 1fr)'

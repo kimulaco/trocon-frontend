@@ -1,5 +1,6 @@
 import React, { memo, FC } from 'react'
-import { Box, ChakraProps, Skeleton, SkeletonProps, Fade } from '@chakra-ui/react'
+import { ChakraProps, SkeletonProps, Fade } from '@chakra-ui/react'
+import { Box, Skeleton } from '@/components/chakra/'
 
 export type UserIconProps = {
   src: string

@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { typedFetch } from '@/utils/typedFetch'
+import { logger } from '@/utils/logger'
 import { User, Game, GameTrophy } from '@/types/steam'
 
 const { NEXT_PUBLIC_API_PATH } = process.env
@@ -53,7 +54,7 @@ export const useSteam = (): UseSteamProps => {
       const body = await typedFetch<GetSteamUserResponse>(
         `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}`,
       )
-      console.log(body)
+      logger.log(body)
       setUser(body.user)
       setGames(
         sortGames(body.games).map((game: Game) => {
@@ -73,7 +74,7 @@ export const useSteam = (): UseSteamProps => {
       const body = await typedFetch<GetSteamGameTrophyResponse>(
         `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}/trophy?appid=${appIds.join(',')}`,
       )
-      console.log(body)
+      logger.log(body)
       const trophies = body.trophies
 
       if (trophies.length <= 0) {

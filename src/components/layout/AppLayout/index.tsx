@@ -1,5 +1,6 @@
 import React, { memo, FC, ReactNode } from 'react'
-import { Box, ChakraProps } from '@chakra-ui/react'
+import { ChakraProps } from '@chakra-ui/react'
+import { Box } from '@/components/chakra/'
 
 export type AppLayoutProps = {
   children?: ReactNode
