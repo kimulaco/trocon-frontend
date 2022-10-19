@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { Box, Heading, Grid, GridItem } from '@/components/chakra/'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
-import { IntersectionObserverContainer } from '@/components/atoms/IntersectionObserver/'
+import { IntersectionObserverContainer } from '@/components/atoms/IntersectionObserverContainer/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
 import { GameView } from '@/components/molecules/GameView/'
 import { GameTrophyProgress } from '@/components/molecules/GameTrophyProgress/'
@@ -19,7 +19,7 @@ const getUnLoadedAppIds = (games: Game[]): number[] => {
   const unLoadedGames = games.filter((game: Game) => {
     return !!game?.isLoadingTrophies
   })
-  console.log('unLoadedGames:', unLoadedGames)
+  // console.log('unLoadedGames:', unLoadedGames)
   return unLoadedGames.map((game: Game) => {
     return game.appId
   })
