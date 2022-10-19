@@ -34,7 +34,7 @@ export const GameViewMeta: FC<GameViewMetaProps> = memo(function GameViewMeta({
           }</Text>
         </> :
         <>
-          <SkeletonText noOfLines={1} mt={4} />
+          <SkeletonText noOfLines={1} mt={4} mb='13px' />
         </>
       }
     </>

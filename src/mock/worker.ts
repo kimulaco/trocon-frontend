@@ -1,11 +1,13 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-export {}
-
-if (typeof window === 'undefined') {
-  import('./server').then(({ server }) => {
-    server.listen()
-  })
-} else {
-  const { worker } = require('./browser')
-  worker.start()
+export const startWorker = async () => {
+  if (typeof window === 'undefined') {
+    const { server } = await import('./server')
+    server.listen({
+      onUnhandledRequest: 'bypass',
+    })
+  } else {
+    const { worker } = await import('./browser')
+    worker.start({
+      onUnhandledRequest: 'bypass',
+    })
+  }
 }

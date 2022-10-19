@@ -1,18 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import type { AppProps } from 'next/app'
 import { ChakraProvider } from '@chakra-ui/provider'
 import { theme } from '@chakra-ui/react'
+import { useMock } from '@/utils/useMock'
 import '@/styles/variables.css'
 
-if (process.env.NODE_ENV === 'development') {
-  const MockServer = () => import('@/mock/worker')
-  MockServer()
-}
-
 const App = ({ Component, pageProps }: AppProps) => {
+  const { isReadyMock, setupMock } = useMock()
+
+  useEffect(() => {
+    setupMock()
+  }, [setupMock])
+
   return (
     <ChakraProvider theme={theme}>
-      <Component {...pageProps} />
+      {isReadyMock && <Component {...pageProps} />}
     </ChakraProvider>
   )
 }

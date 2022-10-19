@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "next",
+    "dev:mock": "NEXT_PUBLIC_USE_MOCK=true next",
     "build": "next build",
     "start": "next start",
     "lint:es": "next lint --dir src",
@@ -10,23 +11,24 @@
     "lint:format": "prettier --write './src/**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.3.5",
+    "@chakra-ui/react": "^2.3.6",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
     "framer-motion": "^7",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.6.0"
   },
   "devDependencies": {
-    "@types/node": "^18.8.3",
+    "@types/node": "^18.11.0",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
-    "@typescript-eslint/eslint-plugin": "^5.39.0",
-    "@typescript-eslint/parser": "^5.39.0",
-    "eslint": "^8.24.0",
+    "@typescript-eslint/eslint-plugin": "^5.40.1",
+    "@typescript-eslint/parser": "^5.40.1",
+    "eslint": "^8.25.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "^7.31.8",
+    "eslint-plugin-react": "^7.31.10",
     "msw": "^0.47.4",
     "prettier": "^2.7.1",
     "typescript": "^4.8.4"

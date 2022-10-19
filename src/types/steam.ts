@@ -15,12 +15,12 @@ export type Game = {
   name: string
   iconImgUrl: string
   headerImgUrl: string
-  storeUrl: number
+  storeUrl: string
   hasCommunityVisibleStats: boolean
   playtime: number
   rtimeLastPlayed: number
   trophies?: Trophy[]
-  isLoadedTrophies?: boolean
+  isLoadingTrophies?: boolean
 }
 
 export type Trophy = {

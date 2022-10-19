@@ -10,6 +10,7 @@ export type GameViewProps = {
   isLoading?: boolean
   rootTagName?: string
   titleTagName?: HeadingProps['as']
+  clickable?: boolean
   chakra?: ChakraProps
   progress?: ReactNode
 }
@@ -23,7 +24,10 @@ export const GameView: FC<GameViewProps> = memo(function GameView({
   progress,
 }: GameViewProps) {
   return (
-    <Box is={rootTagName} {...chakra || {}}>
+    <Box
+      is={rootTagName}
+      {...chakra || {}}
+    >
       <GameViewHeader
         headerImgUrl={game?.headerImgUrl || ''}
         isLoading={isLoading}

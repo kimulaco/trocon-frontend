@@ -12,6 +12,8 @@ import {
   GridProps,
   GridItem as _GridItem,
   GridItemProps,
+  Button as _Button,
+  ButtonProps,
   Progress as _Progress,
   ProgressProps,
   Skeleton as _Skeleton,
@@ -42,6 +44,10 @@ export const Grid: FC<GridProps> = memo(function Grid(props) {
 
 export const GridItem: FC<GridItemProps> = memo(function GridItem(props) {
   return <_GridItem {...props} />
+})
+
+export const Button: FC<ButtonProps> = memo(function Button(props) {
+  return <_Button {...props} />
 })
 
 export const Progress: FC<ProgressProps> = memo(function Progress(props) {

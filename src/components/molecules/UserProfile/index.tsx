@@ -42,6 +42,11 @@ export const UserProfile: FC<UserProfileProps> = memo(function UserProfile ({
           <UserIcon
             src={user?.avatarFull || ''}
             isLoading={isLoading}
+            chakra={{
+              border: '1px solid',
+              borderColor: 'gray.100',
+              boxShadow: 'sm',
+            }}
           />
           <Box
             fontSize='md'

@@ -1,7 +1,9 @@
 import { rest, ResponseResolver, RestRequest, PathParams, RestContext, DefaultBodyType } from 'msw'
-import { complatedGame, zeroGame, halfGame } from '../data/game'
+import { complatedGame, zeroGame, halfGame, noGame } from '../data/game'
+import { Game } from '../../types/steam'
 
 const { NEXT_PUBLIC_API_PATH } = process.env
+const GAME_LENGTH = 20
 
 const url = `${NEXT_PUBLIC_API_PATH}/api/steam/user/:steamId`
 
@@ -11,13 +13,12 @@ const onRequest: ResponseResolver<
   DefaultBodyType
 > = (req, res, ctx) => {
   return res(
+    ctx.delay(2000),
     ctx.status(200),
     ctx.json({
       statusCode: 200,
-      user: createUser({
-        steamId: req.params.steamId,
-      }),
-      games,
+      user: createUser({ steamId: req.params.steamId }),
+      games: createGames(),
     }),
   )
 }
@@ -41,4 +42,15 @@ const createUser = (user = {}) => {
   )
 }
 
-const games = [complatedGame, zeroGame, halfGame]
+const createGames = (): Game[] => {
+  const _games: Game[] = [...Array(GAME_LENGTH)].map((_, index: number): Game => {
+    const game = games[index % games.length]
+    return {
+      ...game,
+      appId: index,
+    }
+  })
+  return _games
+}
+
+const games: Readonly<Game[]> = [complatedGame, zeroGame, halfGame, noGame]
