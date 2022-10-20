@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo, useCallback, useEffect, FC, ReactNode } from 'react'
+import React, { memo, useEffect, FC, ReactNode } from 'react'
 import { Box, ChakraProps } from '@chakra-ui/react'
 import { useInView, IntersectionOptions } from 'react-intersection-observer'
 

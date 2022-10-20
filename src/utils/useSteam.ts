@@ -22,10 +22,6 @@ type UserState = {
   isLoading: boolean
 }
 
-type UseSteamProps = {
-  loadTrophyPerPage: number
-}
-
 type UseSteamValues = {
   user: UserState
   getUser: (steamId: string) => Promise<void>
@@ -63,11 +59,7 @@ const filterUnLoadedAppId = (appIds: number[], games: Game[]): number[] => {
   })
 }
 
-export const useSteam = (_props?: Partial<UseSteamProps>): UseSteamValues => {
-  const props: UseSteamProps = {
-    loadTrophyPerPage: 10,
-    ...(_props || {}),
-  }
+export const useSteam = (): UseSteamValues => {
   const [user, setUser] = useState<UserState>({
     info: undefined,
     games: [],
