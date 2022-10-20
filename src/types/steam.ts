@@ -20,6 +20,7 @@ export type Game = {
   playtime: number
   rtimeLastPlayed: number
   trophies?: Trophy[]
+  isFailedGetTrophies?: boolean
   isLoadingTrophies?: boolean
 }
 

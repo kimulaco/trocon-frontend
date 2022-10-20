@@ -26,6 +26,7 @@ export const GameView: FC<GameViewProps> = memo(function GameView({
   return (
     <Box
       is={rootTagName}
+      data-app-id={game?.appId || ''}
       {...chakra || {}}
     >
       <GameViewHeader

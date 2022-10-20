@@ -1,8 +1,9 @@
 import React, { FC, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Flex, Heading, Grid, GridItem } from '@/components/chakra/'
+import { Box, Flex, Heading, Text, Grid, GridItem } from '@/components/chakra/'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
+import { ErrorText } from '@/components/atoms/ErrorText/'
 import { BaseButton } from '@/components/atoms/BaseButton/'
 import { IntersectionObserverContainer } from '@/components/atoms/IntersectionObserverContainer/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
@@ -17,13 +18,20 @@ import { Game } from '@/types/steam'
 const GAME_PER_PAGE = 12
 
 const getUnLoadedAppIds = (games: Game[]): number[] => {
-  const unLoadedGames = games.filter((game: Game) => {
-    return !!game?.isLoadingTrophies
-  })
-  // console.log('unLoadedGames:', unLoadedGames)
-  return unLoadedGames.map((game: Game) => {
-    return game.appId
-  })
+  return games
+    .filter((game: Game) => {
+      return !!game?.isLoadingTrophies
+    })
+    .map((game: Game) => {
+      return game.appId
+    })
+}
+
+const getIsVisibleTrophyProgress = (game: Game): boolean => {
+  if (game.isLoadingTrophies) {
+    return true
+  }
+  return !game.isFailedGetTrophies && (game.trophies || []).length > 0
 }
 
 const UserPage: FC = () => {
@@ -66,10 +74,10 @@ const UserPage: FC = () => {
         </Heading>
 
         <Grid
-          templateColumns='repeat(1, 1fr)'
+          templateColumns={{sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)'}}
           gridAutoColumns='1fr'
           gridAutoFlow='row'
-          gap={8}
+          gap={{sm: 8, md: 6}}
         >
           {user.isLoading && [...Array(18)].map((_, i: number) => (
             <GridItem key={`GameViewSkeleton-${i}`}>
@@ -113,17 +121,28 @@ const UserPage: FC = () => {
                     <GameTrophyProgress
                       trophies={game.trophies || []}
                       isLoading={!!game.isLoadingTrophies}
-                      chakra={{ mt: 2 }}
+                      chakra={{
+                        mt: 2,
+                        visibility: getIsVisibleTrophyProgress(game) ? 'visible' : 'hidden',
+                      }}
                     />
                     <Flex mt={3}>
-                      <BaseButton
-                        isLoading={!!game.isLoadingTrophies}
-                        isHidden={!!game.isLoadingTrophies && (game?.trophies || []).length <= 0}
-                        chakra={{ ml: 'auto'}}
-                        onClick={() => {handleClickGameDetail(game)}}
-                      >
-                        Show detail
-                      </BaseButton>
+                      {getIsVisibleTrophyProgress(game) && (
+                        <BaseButton
+                          isLoading={!!game.isLoadingTrophies}
+                          isHidden={!!game.isLoadingTrophies}
+                          chakra={{ ml: 'auto'}}
+                          onClick={() => {handleClickGameDetail(game)}}
+                        >
+                          Show detail
+                        </BaseButton>
+                      )}
+                      {!getIsVisibleTrophyProgress(game) && game.isFailedGetTrophies && (
+                        <ErrorText>Failed to get trophies.</ErrorText>
+                      )}
+                      {!getIsVisibleTrophyProgress(game) && !game.isFailedGetTrophies && (
+                        <Text color='gray.500'>This game has no trophies.</Text>
+                      )}
                     </Flex>
                   </>
                 }

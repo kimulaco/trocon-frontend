@@ -126,6 +126,7 @@ export const useSteam = (_props?: Partial<UseSteamProps>): UseSteamValues => {
         return {
           ..._game,
           isLoadingTrophies: false,
+          isFailedGetTrophies: !trophy.success,
           trophies: sortTrophies(trophy.trophies),
         }
       })

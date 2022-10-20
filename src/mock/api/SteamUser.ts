@@ -1,5 +1,5 @@
 import { rest, ResponseResolver, RestRequest, PathParams, RestContext, DefaultBodyType } from 'msw'
-import { complatedGame, zeroGame, halfGame, noGame } from '../data/game'
+import { complatedGame, zeroGame, halfGame, noGame, failedGame } from '../data/game'
 import { Game } from '../../types/steam'
 
 const { NEXT_PUBLIC_API_PATH } = process.env
@@ -53,4 +53,4 @@ const createGames = (): Game[] => {
   return _games
 }
 
-const games: Readonly<Game[]> = [complatedGame, zeroGame, halfGame, noGame]
+const games: Readonly<Game[]> = [complatedGame, zeroGame, halfGame, noGame, failedGame]
