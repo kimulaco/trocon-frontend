@@ -12,7 +12,7 @@ export type GameViewProps = {
   titleTagName?: HeadingProps['as']
   clickable?: boolean
   chakra?: ChakraProps
-  progress?: ReactNode
+  body?: ReactNode
 }
 
 export const GameView: FC<GameViewProps> = memo(function GameView({
@@ -21,7 +21,7 @@ export const GameView: FC<GameViewProps> = memo(function GameView({
   rootTagName = 'div',
   titleTagName = 'h3',
   chakra = {},
-  progress,
+  body,
 }: GameViewProps) {
   return (
     <Box
@@ -45,7 +45,7 @@ export const GameView: FC<GameViewProps> = memo(function GameView({
           titleTagName={titleTagName}
           isLoading={isLoading}
         />
-        {progress}
+        {body}
       </Box>
     </Box>
   )

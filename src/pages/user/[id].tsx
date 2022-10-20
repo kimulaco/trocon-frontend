@@ -1,8 +1,9 @@
 import React, { FC, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Box, Heading, Grid, GridItem } from '@/components/chakra/'
+import { Box, Flex, Heading, Grid, GridItem } from '@/components/chakra/'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
+import { BaseButton } from '@/components/atoms/BaseButton/'
 import { IntersectionObserverContainer } from '@/components/atoms/IntersectionObserverContainer/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
 import { GameView } from '@/components/molecules/GameView/'
@@ -74,8 +75,19 @@ const UserPage: FC = () => {
             <GridItem key={`GameViewSkeleton-${i}`}>
               <GameView
                 isLoading={true}
-                progress={
-                  <GameTrophyProgress isLoading={true} />
+                body={
+                  <>
+                    <GameTrophyProgress isLoading={true} />
+                    <Flex mt={3}>
+                      <BaseButton
+                        isLoading={true}
+                        isHidden={true}
+                        chakra={{ ml: 'auto'}}
+                      >
+                        Show detail
+                      </BaseButton>
+                    </Flex>
+                  </>
                 }
               />
             </GridItem>
@@ -96,13 +108,24 @@ const UserPage: FC = () => {
                 rootTagName='section'
                 game={game}
                 isLoading={user.isLoading}
-                progress={
-                  <GameTrophyProgress
-                    trophies={game.trophies || []}
-                    isLoading={!!game.isLoadingTrophies}
-                    chakra={{ mt: 2 }}
-                    onClickButton={() => {handleClickGameDetail(game)}}
-                  />
+                body={
+                  <>
+                    <GameTrophyProgress
+                      trophies={game.trophies || []}
+                      isLoading={!!game.isLoadingTrophies}
+                      chakra={{ mt: 2 }}
+                    />
+                    <Flex mt={3}>
+                      <BaseButton
+                        isLoading={!!game.isLoadingTrophies}
+                        isHidden={!!game.isLoadingTrophies && (game?.trophies || []).length <= 0}
+                        chakra={{ ml: 'auto'}}
+                        onClick={() => {handleClickGameDetail(game)}}
+                      >
+                        Show detail
+                      </BaseButton>
+                    </Flex>
+                  </>
                 }
               />
             </GridItem>

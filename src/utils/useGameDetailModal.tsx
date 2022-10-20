@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react'
 import { RiCheckboxCircleFill, RiLock2Line } from 'react-icons/ri'
 import { Flex, Box } from '@/components/chakra/'
+import { GameTrophyProgress } from '@/components/molecules/GameTrophyProgress/'
 import { Game, Trophy } from '@/types/steam'
 
 type UseGameDetailModal = () => {
@@ -52,33 +53,40 @@ export const useGameDetailModal: UseGameDetailModal = () => {
           <ModalCloseButton />
           <ModalBody>
             {game &&
-              <Box mb={4}>
-                <img
-                  src={game.headerImgUrl}
-                  alt=""
-                  width={460}
-                  height={215}
-                  loading="lazy"
+              <>
+                <Box mb={4}>
+                  <img
+                    src={game.headerImgUrl}
+                    alt=""
+                    width={460}
+                    height={215}
+                    loading="lazy"
+                  />
+                </Box>
+
+                <GameTrophyProgress
+                  trophies={game.trophies || []}
+                  isLoading={!!game.isLoadingTrophies}
+                  chakra={{ mt: 2, mb: 6 }}
                 />
-              </Box>
+
+                <Box as='ul' listStyleType='none'>
+                  {(game.trophies || []).map((trophy: Trophy) => {
+                    return (
+                      <Flex
+                        key={`${game?.appId || ''}-${trophy.apiname}`}
+                        as='li'
+                        alignItems='center'
+                        mb={2}
+                      >
+                        <Icon as={trophy.achieved ? RiCheckboxCircleFill : RiLock2Line} mr={2} />
+                        <Box>{trophy.name}</Box>
+                      </Flex>
+                    )
+                  })}
+                </Box>
+              </>
             }
-            {game && (
-              <Box as='ul' listStyleType='none'>
-                {(game.trophies || []).map((trophy: Trophy) => {
-                  return (
-                    <Flex
-                      key={`${game?.appId || ''}-${trophy.apiname}`}
-                      as='li'
-                      alignItems='center'
-                      mb={2}
-                    >
-                      <Icon as={trophy.achieved ? RiCheckboxCircleFill : RiLock2Line} mr={2} />
-                      <Box>{trophy.name}</Box>
-                    </Flex>
-                  )
-                })}
-              </Box>
-            )}
           </ModalBody>
         </ModalContent>
       </Modal>

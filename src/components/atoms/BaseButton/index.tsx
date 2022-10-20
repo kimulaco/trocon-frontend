@@ -1,24 +1,24 @@
 import React, { memo, FC, ReactNode } from 'react'
-import { Fade, ChakraProps } from '@chakra-ui/react'
+import { Fade, ChakraProps, ButtonProps } from '@chakra-ui/react'
 import { Box, Button, Skeleton } from '@/components/chakra/'
 
-export type GameTrophyProgressButtonProps = {
+export type BaseButtonProps = {
   isHidden?: boolean
   isLoading?: boolean
   children?: ReactNode
   chakra?: ChakraProps
+  buttonChakra?: ButtonProps
   onClick?: () => void
 }
 
-export const GameTrophyProgressButton: FC<
-  GameTrophyProgressButtonProps
-> = memo(function GameTrophyProgressButton({
+export const BaseButton: FC<BaseButtonProps> = memo(function BaseButton({
   isHidden,
   isLoading,
   children,
   chakra = {},
+  buttonChakra = {},
   onClick,
-}: GameTrophyProgressButtonProps) {
+}: BaseButtonProps) {
   return (
     <Box position='relative' display='inline-flex' {...chakra}>
       <Button
@@ -26,6 +26,7 @@ export const GameTrophyProgressButton: FC<
         borderRadius='sm'
         visibility={isLoading || isHidden ? 'hidden' : 'visible'}
         onClick={onClick}
+        {...buttonChakra}
       >
         {children}
       </Button>
