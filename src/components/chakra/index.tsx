@@ -1,5 +1,7 @@
 import React, { memo, FC } from 'react'
 import {
+  Link as _Link,
+  LinkProps,
   Box as _Box,
   BoxProps,
   Flex as _Flex,
@@ -21,6 +23,10 @@ import {
   SkeletonText as _SkeletonText,
   SkeletonTextProps,
 } from '@chakra-ui/react'
+
+export const Link: FC<LinkProps> = memo(function Link(props) {
+  return <_Link {...props} />
+})
 
 export const Box: FC<BoxProps> = memo(function Box(props) {
   return <_Box {...props} />

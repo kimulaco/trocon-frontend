@@ -12,6 +12,28 @@ const onRequest: ResponseResolver<
   RestContext,
   DefaultBodyType
 > = (req, res, ctx) => {
+  if (req.params.steamId.length !== 17 || isNaN(Number(req.params.steamId))) {
+    return res(
+      ctx.delay(2000),
+      ctx.status(400),
+      ctx.json({
+        statusCode: 400,
+        message: 'Invalid Steam ID',
+      }),
+    )
+  }
+
+  if (Number(req.params.steamId) === 0) {
+    return res(
+      ctx.delay(2000),
+      ctx.status(404),
+      ctx.json({
+        statusCode: 404,
+        message: 'Not found user',
+      }),
+    )
+  }
+
   return res(
     ctx.delay(2000),
     ctx.status(200),

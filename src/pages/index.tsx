@@ -1,12 +1,23 @@
-import React, { FC } from 'react'
+import React, { useCallback, FC } from 'react'
+import { useRouter } from 'next/router'
 import { AppLayout } from '@/components/layout/AppLayout/'
 import { AppInner } from '@/components/layout/AppInner/'
+import { TopTitle } from '@/components/molecules/TopTitle/'
+import { UserSearchForm } from '@/components/molecules/UserSearchForm/'
 
 const IndexPage: FC = () => {
+  const router = useRouter()
+
+  const handleSubmitForm = useCallback((value: string) => {
+    router.push(`/user/${value}`)
+  }, [])
+
   return (
     <AppLayout>
       <AppInner>
-        <h1>Hello Next.js</h1>
+        <TopTitle>Trocon</TopTitle>
+
+        <UserSearchForm onSubmit={handleSubmitForm} />
       </AppInner>
     </AppLayout>
   )

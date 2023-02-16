@@ -10,7 +10,7 @@ const theme = extendTheme({
     sm: '320px',
     md: '768px',
     lg: '1000px',
-  }
+  },
 })
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -21,9 +21,7 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [setupMock])
 
   return (
-    <ChakraProvider theme={theme}>
-      {isReadyMock && <Component {...pageProps} />}
-    </ChakraProvider>
+    <ChakraProvider theme={theme}>{isReadyMock && <Component {...pageProps} />}</ChakraProvider>
   )
 }
 
