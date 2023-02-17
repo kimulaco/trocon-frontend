@@ -1,4 +1,4 @@
-# trophy-comp-client
+# trocon
 
 ```bash
 # Install dependencies
