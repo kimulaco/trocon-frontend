@@ -1,5 +1,5 @@
 import React, { memo, FC } from 'react'
-import { Link, ChakraProps } from '@chakra-ui/react'
+import { ChakraProps } from '@chakra-ui/react'
 import { Flex, Box, Skeleton, SkeletonText } from '@/components/chakra/'
 import { UserIcon } from '@/components/atoms/UserIcon/'
 import { User } from '@/types/steam'
@@ -10,35 +10,22 @@ export type UserProfileProps = {
   chakra?: ChakraProps
 }
 
-export const UserProfile: FC<UserProfileProps> = memo(function UserProfile ({
+export const UserProfile: FC<UserProfileProps> = memo(function UserProfile({
   user,
   isLoading = false,
   chakra = {},
 }: UserProfileProps) {
   return (
-    <Flex
-      w='100%'
-      pt={4}
-      flexDirection='column'
-      justify='center'
-      alignItems='center'
-      {...chakra || {}}
-    >
+    <Flex w='100%' pt='50px' pb='50px' px='3' mx='auto' {...(chakra || {})}>
       {isLoading && (
-        <Box>
+        <Flex alignItems='center'>
           <Skeleton w='92px' h='92px' />
           <SkeletonText noOfLines={1} mt='4' />
-        </Box>
+        </Flex>
       )}
 
       {!isLoading && (
-        <Link
-          target='_blank'
-          href={user?.profileUrl || ''}
-          display='flex'
-          flexDirection='column'
-          alignItems='center'
-        >
+        <Flex alignItems='center'>
           <UserIcon
             src={user?.avatarFull || ''}
             isLoading={isLoading}
@@ -48,11 +35,10 @@ export const UserProfile: FC<UserProfileProps> = memo(function UserProfile ({
               boxShadow: 'sm',
             }}
           />
-          <Box
-            fontSize='md'
-            mt='2'
-          >{user?.personaName || ''}</Box>
-        </Link>
+          <Box fontSize='lg' ml='4'>
+            {user?.personaName || ''}
+          </Box>
+        </Flex>
       )}
     </Flex>
   )

@@ -24,28 +24,10 @@ export const GameView: FC<GameViewProps> = memo(function GameView({
   body,
 }: GameViewProps) {
   return (
-    <Box
-      is={rootTagName}
-      data-app-id={game?.appId || ''}
-      {...chakra || {}}
-    >
-      <GameViewHeader
-        headerImgUrl={game?.headerImgUrl || ''}
-        isLoading={isLoading}
-      />
-      <Box
-        p={4}
-        border='1px solid'
-        borderTop='0'
-        borderColor='gray.300'
-        borderBottomRadius='sm'
-      >
-        <GameViewMeta
-          name={game?.name || ''}
-          rtimeLastPlayed={game?.rtimeLastPlayed || 0}
-          titleTagName={titleTagName}
-          isLoading={isLoading}
-        />
+    <Box is={rootTagName} data-app-id={game?.appId || ''} {...(chakra || {})}>
+      <GameViewHeader headerImgUrl={game?.headerImgUrl || ''} isLoading={isLoading} />
+      <Box p={4} border='1px solid' borderTop='0' borderColor='gray.300' borderBottomRadius='sm'>
+        <GameViewMeta name={game?.name || ''} titleTagName={titleTagName} isLoading={isLoading} />
         {body}
       </Box>
     </Box>

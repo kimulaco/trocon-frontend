@@ -3,7 +3,6 @@ import type { FC, FormEvent, ChangeEvent } from 'react'
 import {
   Flex,
   Link,
-  Text,
   Button,
   Input,
   FormControl,
@@ -14,10 +13,8 @@ import {
   PopoverContent,
   PopoverHeader,
   PopoverBody,
-  PopoverFooter,
   PopoverArrow,
   PopoverCloseButton,
-  PopoverAnchor,
 } from '@chakra-ui/react'
 import { QuestionIcon, ExternalLinkIcon } from '@chakra-ui/icons'
 import { isValidSteamId, STEAM_ID_HELP_URL } from './validate'
