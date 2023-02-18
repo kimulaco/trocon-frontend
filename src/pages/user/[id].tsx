@@ -7,6 +7,7 @@ import { AppInner } from '@/components/layout/AppInner/'
 import { ErrorText } from '@/components/atoms/ErrorText/'
 import { BaseButton } from '@/components/atoms/BaseButton/'
 import { IntersectionObserverContainer } from '@/components/atoms/IntersectionObserverContainer/'
+import { ErrorTitle } from '@/components/molecules/ErrorTitle/'
 import { UserProfile } from '@/components/molecules/UserProfile/'
 import { GameView } from '@/components/molecules/GameView/'
 import { GameTrophyProgress } from '@/components/molecules/GameTrophyProgress/'
@@ -61,102 +62,111 @@ const UserPage: FC = () => {
 
   useEffect(() => {
     if (!id) return
-    try {
-      getUser(queryToString(id))
-    } catch (error) {
+
+    getUser(queryToString(id)).catch((error) => {
       logger.error(error)
-    }
+    })
   }, [id])
 
   return (
     <AppLayout>
       <AppHeader />
 
-      <AppInner type='full'>
-        <UserProfile user={user.info} isLoading={user.isLoading} />
-      </AppInner>
+      {user.error && (
+        <AppInner>
+          <ErrorTitle title={user.error.title} message={user.error.message} />
+        </AppInner>
+      )}
 
-      <AppInner>
-        <Grid
-          templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
-          gridAutoColumns='1fr'
-          gridAutoFlow='row'
-          gap={{ sm: 8, md: 6 }}
-        >
-          {user.isLoading &&
-            [...Array(18)].map((_, i: number) => (
-              <GridItem key={`GameViewSkeleton-${i}`}>
-                <GameView
-                  isLoading={true}
-                  body={
-                    <>
-                      <GameTrophyProgress isLoading={true} />
-                      <Flex mt={3}>
-                        <BaseButton isLoading={true} isHidden={true} chakra={{ ml: 'auto' }}>
-                          Show detail
-                        </BaseButton>
-                      </Flex>
-                    </>
-                  }
-                />
-              </GridItem>
-            ))}
+      {!user.error && (
+        <>
+          <AppInner type='full'>
+            <UserProfile user={user.info} isLoading={user.isLoading} />
+          </AppInner>
 
-          {!user.isLoading &&
-            user.games.map((game: Game, i: number) => (
-              <GridItem key={`GameView-${i}`}>
-                {i % GAME_PER_PAGE === 0 && (
-                  <IntersectionObserverContainer
-                    onIntersecting={(entry: IntersectionObserverEntry) => {
-                      handleIntersectObserver(entry, i)
-                    }}
-                    chakra={{ w: '100%', h: '1px', mb: '-1px', opacity: 0 }}
-                  />
-                )}
+          <AppInner>
+            <Grid
+              templateColumns={{ sm: 'repeat(1, 1fr)', md: 'repeat(3, 1fr)' }}
+              gridAutoColumns='1fr'
+              gridAutoFlow='row'
+              gap={{ sm: 8, md: 6 }}
+            >
+              {user.isLoading &&
+                [...Array(18)].map((_, i: number) => (
+                  <GridItem key={`GameViewSkeleton-${i}`}>
+                    <GameView
+                      isLoading={true}
+                      body={
+                        <>
+                          <GameTrophyProgress isLoading={true} />
+                          <Flex mt={3}>
+                            <BaseButton isLoading={true} isHidden={true} chakra={{ ml: 'auto' }}>
+                              Show detail
+                            </BaseButton>
+                          </Flex>
+                        </>
+                      }
+                    />
+                  </GridItem>
+                ))}
 
-                <GameView
-                  rootTagName='section'
-                  game={game}
-                  isLoading={user.isLoading}
-                  body={
-                    <>
-                      <GameTrophyProgress
-                        trophies={game.trophies || []}
-                        isLoading={!!game.isLoadingTrophies}
-                        chakra={{
-                          mt: 2,
-                          visibility: getIsVisibleTrophyProgress(game) ? 'visible' : 'hidden',
+              {!user.isLoading &&
+                user.games.map((game: Game, i: number) => (
+                  <GridItem key={`GameView-${i}`}>
+                    {i % GAME_PER_PAGE === 0 && (
+                      <IntersectionObserverContainer
+                        onIntersecting={(entry: IntersectionObserverEntry) => {
+                          handleIntersectObserver(entry, i)
                         }}
+                        chakra={{ w: '100%', h: '1px', mb: '-1px', opacity: 0 }}
                       />
-                      <Flex mt={3}>
-                        {getIsVisibleTrophyProgress(game) && (
-                          <BaseButton
-                            isLoading={!!game.isLoadingTrophies}
-                            isHidden={!!game.isLoadingTrophies}
-                            chakra={{ ml: 'auto' }}
-                            onClick={() => {
-                              handleClickGameDetail(game)
-                            }}
-                          >
-                            Show detail
-                          </BaseButton>
-                        )}
-                        {!getIsVisibleTrophyProgress(game) && game.isFailedGetTrophies && (
-                          <ErrorText>Failed to get trophies.</ErrorText>
-                        )}
-                        {!getIsVisibleTrophyProgress(game) && !game.isFailedGetTrophies && (
-                          <Text color='gray.500'>This game has no trophies.</Text>
-                        )}
-                      </Flex>
-                    </>
-                  }
-                />
-              </GridItem>
-            ))}
-        </Grid>
-      </AppInner>
+                    )}
 
-      <GameDetailModal />
+                    <GameView
+                      rootTagName='section'
+                      game={game}
+                      isLoading={user.isLoading}
+                      body={
+                        <>
+                          <GameTrophyProgress
+                            trophies={game.trophies || []}
+                            isLoading={!!game.isLoadingTrophies}
+                            chakra={{
+                              mt: 2,
+                              visibility: getIsVisibleTrophyProgress(game) ? 'visible' : 'hidden',
+                            }}
+                          />
+                          <Flex mt={3}>
+                            {getIsVisibleTrophyProgress(game) && (
+                              <BaseButton
+                                isLoading={!!game.isLoadingTrophies}
+                                isHidden={!!game.isLoadingTrophies}
+                                chakra={{ ml: 'auto' }}
+                                onClick={() => {
+                                  handleClickGameDetail(game)
+                                }}
+                              >
+                                Show detail
+                              </BaseButton>
+                            )}
+                            {!getIsVisibleTrophyProgress(game) && game.isFailedGetTrophies && (
+                              <ErrorText>Failed to get trophies.</ErrorText>
+                            )}
+                            {!getIsVisibleTrophyProgress(game) && !game.isFailedGetTrophies && (
+                              <Text color='gray.500'>This game has no trophies.</Text>
+                            )}
+                          </Flex>
+                        </>
+                      }
+                    />
+                  </GridItem>
+                ))}
+            </Grid>
+          </AppInner>
+
+          <GameDetailModal />
+        </>
+      )}
     </AppLayout>
   )
 }

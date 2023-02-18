@@ -18,7 +18,7 @@ export const AppInner: FC<AppInnerProps> = memo(function AppInner({
       w='100%'
       maxW='var(--app-inner-max-width)'
       minW={type === 'center' ? 'var(--app-inner-min-width)' : ''}
-      m='auto'
+      mx='auto'
       px={type === 'center' ? 3 : 0}
       {...(chakra || {})}
     >

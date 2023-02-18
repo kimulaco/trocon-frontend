@@ -20,12 +20,34 @@ type UserState = {
   info?: User
   games: Game[]
   isLoading: boolean
+  error?: {
+    title: string
+    message: string
+  }
 }
 
 type UseSteamValues = {
   user: UserState
   getUser: (steamId: string) => Promise<void>
   getGameTrophy: (steamId: string, appIds: number[]) => Promise<void>
+}
+
+const ERROR_MESSAGES = {
+  STEAM_USER_NOT_FOUND: 'Steamアカウントが見つかりませんでした。',
+  STEAM_USER_INTERNAL_ERROR: 'エラーが発生しました。',
+} as const
+
+const getErrorMessage = (errorCode: unknown): string => {
+  if (typeof errorCode !== 'string') {
+    return ERROR_MESSAGES.STEAM_USER_INTERNAL_ERROR
+  }
+
+  if (errorCode in ERROR_MESSAGES) {
+    // @ts-ignore
+    return ERROR_MESSAGES[errorCode]
+  }
+
+  return ERROR_MESSAGES.STEAM_USER_INTERNAL_ERROR
 }
 
 const sortGames = (games: Game[]): Game[] => {
@@ -64,6 +86,7 @@ export const useSteam = (): UseSteamValues => {
     info: undefined,
     games: [],
     isLoading: false,
+    error: undefined,
   })
 
   const getUser = useMemo<UseSteamValues['getUser']>(() => {
@@ -72,17 +95,31 @@ export const useSteam = (): UseSteamValues => {
         return
       }
 
+      let body: GetSteamUserResponse | undefined
+      let errorState: { title: string; message: string } | undefined
+
       setUser({ ...user, isLoading: true })
-      const body = await typedFetch<GetSteamUserResponse>(
-        `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}`,
-      )
-      logger.log(body)
+
+      try {
+        body = await typedFetch<GetSteamUserResponse>(
+          `${NEXT_PUBLIC_API_PATH}/api/steam/user/${steamId}`,
+        )
+        logger.log(body)
+      } catch (error) {
+        errorState = {
+          title: 'Error',
+          message: getErrorMessage((error as any)?.errorCode),
+        }
+        logger.error(error)
+      }
+
       setUser({
-        info: body.user,
+        info: body?.user,
         isLoading: false,
-        games: sortGames(body.games).map((game: Game) => {
+        games: sortGames(body?.games || []).map((game: Game) => {
           return { ...game, isLoadingTrophies: true }
         }),
+        error: errorState,
       })
     }
   }, [user.isLoading, setUser])

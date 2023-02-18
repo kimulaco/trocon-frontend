@@ -19,5 +19,6 @@ module.exports = {
   ],
   rules: {
     'no-console': [1],
+    '@typescript-eslint/ban-ts-comment': [1],
   },
 }

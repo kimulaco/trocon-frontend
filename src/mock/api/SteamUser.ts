@@ -12,24 +12,38 @@ const onRequest: ResponseResolver<
   RestContext,
   DefaultBodyType
 > = (req, res, ctx) => {
-  if (req.params.steamId.length !== 17 || isNaN(Number(req.params.steamId))) {
+  if (!req.params.steamId) {
     return res(
       ctx.delay(2000),
       ctx.status(400),
       ctx.json({
         statusCode: 400,
-        message: 'Invalid Steam ID',
+        errorCode: 'STEAM_USER_STEAMID_NOT_FOUND',
+        message: 'steamid not found',
       }),
     )
   }
 
-  if (Number(req.params.steamId) === 0) {
+  if (Number(req.params.steamId) === 500) {
+    return res(
+      ctx.delay(2000),
+      ctx.status(500),
+      ctx.json({
+        statusCode: 500,
+        errorCode: 'STEAM_USER_INTERNAL_ERROR',
+        message: 'internal server error',
+      }),
+    )
+  }
+
+  if (req.params.steamId.length !== 17 || isNaN(Number(req.params.steamId))) {
     return res(
       ctx.delay(2000),
       ctx.status(404),
       ctx.json({
         statusCode: 404,
-        message: 'Not found user',
+        errorCode: 'STEAM_USER_NOT_FOUND',
+        message: 'user not found',
       }),
     )
   }
