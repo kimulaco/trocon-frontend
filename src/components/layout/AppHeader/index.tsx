@@ -1,7 +1,7 @@
 import React, { memo, FC } from 'react'
 import Link from 'next/link'
-import { ChakraProps } from '@chakra-ui/react'
-import { Box } from '@/components/chakra/'
+import { Badge, ChakraProps } from '@chakra-ui/react'
+import { Box, Flex } from '@/components/chakra/'
 
 export type AppHeaderProps = {
   chakra?: ChakraProps
@@ -18,7 +18,16 @@ export const AppHeader: FC<AppHeaderProps> = memo(function AppHeader({ chakra }:
         px='3'
       >
         <Box as='h1' py='3' fontSize='2xl' fontWeight='bold'>
-          <Link href='/'>Trocon</Link>
+          <Flex py='1' alignItems='flex-end'>
+            <Link href='/'>
+              <Box as='span' lineHeight='1'>
+                Trocon
+              </Box>
+            </Link>
+            <Badge colorScheme='orange' ml='2'>
+              alpha
+            </Badge>
+          </Flex>
         </Box>
       </Box>
     </Box>
