@@ -2,6 +2,7 @@
   "name": "trocon",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@8.6.10",
   "scripts": {
     "dev": "next",
     "dev:mock": "NEXT_PUBLIC_USE_MOCK=true next",
