@@ -3,7 +3,7 @@ import { typedFetch } from '@/utils/typedFetch'
 import { logger } from '@/utils/logger'
 import { User, Game, GameTrophy, Trophy } from '@/types/steam'
 
-const { NEXT_PUBLIC_API_PATH } = process.env
+const NEXT_PUBLIC_API_PATH = process.env.NEXT_PUBLIC_API_PATH
 
 type GetSteamUserResponse = {
   statusCode: number
