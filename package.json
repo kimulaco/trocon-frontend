@@ -2,6 +2,9 @@
   "name": "trocon",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "18.17.x"
+  },
   "packageManager": "pnpm@8.6.11",
   "scripts": {
     "dev": "next",
