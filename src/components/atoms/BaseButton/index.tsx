@@ -32,14 +32,7 @@ export const BaseButton: FC<BaseButtonProps> = memo(function BaseButton({
       </Button>
 
       <Fade in={isLoading}>
-        <Skeleton
-          w='100%'
-          h='100%'
-          position='absolute'
-          top='0'
-          left='0'
-          borderRadius='sm'
-        />
+        <Skeleton w='100%' h='100%' position='absolute' top='0' left='0' borderRadius='sm' />
       </Fade>
     </Box>
   )

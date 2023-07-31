@@ -31,11 +31,7 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function Gam
   }, [unlockedTrophies, trophies])
 
   return (
-    <Flex
-      w='100%'
-      alignItems='center'
-      {...chakra || {}}
-    >
+    <Flex w='100%' alignItems='center' {...(chakra || {})}>
       {isLoading && (
         <>
           <Skeleton w='100%' h='14px' />
@@ -45,20 +41,8 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function Gam
 
       {!isLoading && (
         <>
-          <Progress
-            w='100%'
-            h='14px'
-            value={rate}
-            colorScheme={rate >= 100 ? 'green' : 'blue'}
-          />
-          <Box
-            minW='104px'
-            ml='2'
-            fontSize='sm'
-            textAlign='right'
-            lineHeight={1}
-            flexShrink={0}
-          >
+          <Progress w='100%' h='14px' value={rate} colorScheme={rate >= 100 ? 'green' : 'blue'} />
+          <Box minW='104px' ml='2' fontSize='sm' textAlign='right' lineHeight={1} flexShrink={0}>
             {`${Math.floor(rate)}% (${unlockedTrophies.length}/${trophies.length})`}
           </Box>
         </>

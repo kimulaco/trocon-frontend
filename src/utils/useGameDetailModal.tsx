@@ -22,13 +22,16 @@ type UseGameDetailModal = () => {
 }
 
 export const useGameDetailModal: UseGameDetailModal = () => {
-  const [game, setGame] = useState<Game|undefined>()
+  const [game, setGame] = useState<Game | undefined>()
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  const showModal = useCallback((game: Game) => {
-    setGame(game)
-    onOpen()
-  }, [setGame, onOpen])
+  const showModal = useCallback(
+    (game: Game) => {
+      setGame(game)
+      onOpen()
+    },
+    [setGame, onOpen],
+  )
 
   const hideModal = useCallback(() => {
     onClose()
@@ -41,27 +44,16 @@ export const useGameDetailModal: UseGameDetailModal = () => {
     }, [onClose])
 
     return (
-      <Modal
-        isOpen={isOpen}
-        onClose={handleOnClose}
-        isCentered
-        scrollBehavior='inside'
-      >
+      <Modal isOpen={isOpen} onClose={handleOnClose} isCentered scrollBehavior='inside'>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{game?.name || ''}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {game &&
+            {game && (
               <>
                 <Box mb={4}>
-                  <img
-                    src={game.headerImgUrl}
-                    alt=""
-                    width={460}
-                    height={215}
-                    loading="lazy"
-                  />
+                  <img src={game.headerImgUrl} alt='' width={460} height={215} loading='lazy' />
                 </Box>
 
                 <GameTrophyProgress
@@ -86,7 +78,7 @@ export const useGameDetailModal: UseGameDetailModal = () => {
                   })}
                 </Box>
               </>
-            }
+            )}
           </ModalBody>
         </ModalContent>
       </Modal>

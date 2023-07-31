@@ -33,7 +33,7 @@ export const UserIcon: FC<UserIconProps> = memo(function UserIcon({
       borderRadius='md'
       overflow='hidden'
       position='relative'
-      {...chakra || {}}
+      {...(chakra || {})}
     >
       <Fade in={isLoading}>
         <Skeleton {...skeletonStyles} />
