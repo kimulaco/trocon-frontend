@@ -2,7 +2,7 @@ import { rest, ResponseResolver, RestRequest, PathParams, RestContext, DefaultBo
 import { complatedGame, zeroGame, halfGame, noGame, failedGame } from '../data/game'
 import { GameTrophy } from '@/types/steam'
 
-const { NEXT_PUBLIC_API_PATH } = process.env
+const NEXT_PUBLIC_API_PATH = process.env.NEXT_PUBLIC_API_PATH
 
 const url = `${NEXT_PUBLIC_API_PATH}/api/steam/user/:steamId/trophy`
 
