@@ -30,11 +30,11 @@ dependencies:
     specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   react-icons:
-    specifier: ^4.7.1
-    version: 4.7.1(react@18.2.0)
+    specifier: ^4.10.1
+    version: 4.10.1(react@18.2.0)
   react-intersection-observer:
-    specifier: ^9.4.2
-    version: 9.4.2(react@18.2.0)
+    specifier: ^9.5.2
+    version: 9.5.2(react@18.2.0)
 
 devDependencies:
   '@next/eslint-plugin-next':
@@ -3125,16 +3125,16 @@ packages:
       use-sidecar: 1.1.2(@types/react@18.2.17)(react@18.2.0)
     dev: false
 
-  /react-icons@4.7.1(react@18.2.0):
-    resolution: {integrity: sha512-yHd3oKGMgm7zxo3EA7H2n7vxSoiGmHk5t6Ou4bXsfcgWyhfDKMpyKfhHR6Bjnn63c+YXBLBPUql9H4wPJM6sXw==}
+  /react-icons@4.10.1(react@18.2.0):
+    resolution: {integrity: sha512-/ngzDP/77tlCfqthiiGNZeYFACw85fUjZtLbedmJ5DTlNDIwETxhwBzdOJ21zj4iJdvc0J3y7yOsX3PpxAJzrw==}
     peerDependencies:
       react: '*'
     dependencies:
       react: 18.2.0
     dev: false
 
-  /react-intersection-observer@9.4.2(react@18.2.0):
-    resolution: {integrity: sha512-AdK+ryzZ7U9ZJYttDUZ8q2Am3nqE0exg5Ryl5Y124KeVsix/1hGZPbdu58EqA98TwnzwDNWHxg/kwNawmIiUig==}
+  /react-intersection-observer@9.5.2(react@18.2.0):
+    resolution: {integrity: sha512-EmoV66/yvksJcGa1rdW0nDNc4I1RifDWkT50gXSFnPLYQ4xUptuDD4V7k+Rj1OgVAlww628KLGcxPXFlOkkU/Q==}
     peerDependencies:
       react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
     dependencies:
