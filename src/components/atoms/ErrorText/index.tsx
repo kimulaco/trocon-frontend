@@ -11,7 +11,7 @@ export const ErrorText: FC<ErrorTextProps> = memo(function UserIcon({
   chakra = {},
 }: ErrorTextProps) {
   return (
-    <Text color='red.500' {...chakra}>
+    <Text color='red.500' data-testid='text' {...chakra}>
       {children}
     </Text>
   )

@@ -26,12 +26,13 @@ export const BaseButton: FC<BaseButtonProps> = memo(function BaseButton({
         borderRadius='sm'
         visibility={isLoading || isHidden ? 'hidden' : 'visible'}
         onClick={onClick}
+        data-testid='button'
         {...buttonChakra}
       >
         {children}
       </Button>
 
-      <Fade in={isLoading}>
+      <Fade in={isLoading} data-testid='fade'>
         <Skeleton w='100%' h='100%' position='absolute' top='0' left='0' borderRadius='sm' />
       </Fade>
     </Box>
