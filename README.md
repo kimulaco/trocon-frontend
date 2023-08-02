@@ -1,3 +1,6 @@
+[![Test](https://github.com/kimulaco/trocon-frontend/actions/workflows/test.yml/badge.svg)](https://github.com/kimulaco/trocon-frontend/actions/workflows/test.yml)
+[![codecov](https://codecov.io/gh/kimulaco/trocon-frontend/branch/main/graph/badge.svg?token=1SNOO0VV2U)](https://codecov.io/gh/kimulaco/trocon-frontend)
+
 # trocon-frontend
 
 Trocon's frontend repository.
@@ -14,15 +17,15 @@ You can see also hidden achievements, so this application helps the achievement 
 
 ```bash
 # Install dependencies
-yarn
+pnpm i
 
 # Development mode
-yarn dev
-yarn dev:mock # with mock service worker
+pnpm run dev
+pnpm run dev:mock # with mock service worker
 
 # Build for production
-yarn build
+pnpm run build
 
 # Launch server for production
-yarn start
+pnpm run start
 ```
