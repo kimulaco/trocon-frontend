@@ -17,6 +17,7 @@
     "lint:format": "prettier --check './src/**/*.{js,jsx,ts,tsx,json}'",
     "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,json}'",
     "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "prepare": "husky install"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "@vitejs/plugin-react": "^4.0.4",
+    "@vitest/coverage-v8": "^0.34.1",
     "eslint": "^8.46.0",
     "eslint-config-prettier": "^8.9.0",
     "husky": "^8.0.3",
