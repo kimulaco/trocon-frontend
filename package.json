@@ -11,9 +11,11 @@
     "dev:mock": "NEXT_PUBLIC_USE_MOCK=true next",
     "build": "next build",
     "start": "next start",
+    "lint": "pnpm run lint:format && pnpm run lint:type && pnpm run lint:es",
     "lint:es": "next lint --dir src",
     "lint:type": "tsc",
-    "lint:format": "prettier --write './src/**/*.{js,jsx,ts,tsx,json}'",
+    "lint:format": "prettier --check './src/**/*.{js,jsx,ts,tsx,json}'",
+    "format": "prettier --write './src/**/*.{js,jsx,ts,tsx,json}'",
     "test": "vitest run",
     "prepare": "husky install"
   },
