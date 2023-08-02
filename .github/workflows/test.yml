@@ -22,4 +22,9 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run lint
-      - run: pnpm run test
+      - run: pnpm run test:coverage
+      - uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          files: ./coverage/coverage-final.json
