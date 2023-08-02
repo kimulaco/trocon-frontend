@@ -11,10 +11,12 @@ module.exports = {
       jsx: true,
     },
   },
+  plugins: ['@typescript-eslint', 'vitest', 'prettier'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:@next/next/recommended',
+    'plugin:vitest/recommended',
     'prettier',
   ],
   rules: {
