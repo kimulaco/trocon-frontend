@@ -19,7 +19,14 @@ export const AppLayout: FC<AppLayoutProps> = memo(function AppLayout({
         <meta property='description' content='Steamの実績解除状態を調べるサービス。' />
       </Head>
 
-      <Flex flexDirection='column' w='100%' minH='var(--chakra-vh)' pb={8} {...(chakra || {})}>
+      <Flex
+        flexDirection='column'
+        w='100%'
+        minH='var(--chakra-vh)'
+        pb={8}
+        data-testid='container'
+        {...(chakra || {})}
+      >
         {children}
 
         <Flex as='footer' justifyContent='center' mt='auto' px='3' pt='8'>
