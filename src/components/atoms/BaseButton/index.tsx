@@ -19,13 +19,19 @@ export const BaseButton: FC<BaseButtonProps> = memo(function BaseButton({
   buttonChakra = {},
   onClick,
 }: BaseButtonProps) {
+  const handleClick = () => {
+    if (typeof onClick === 'function' && !isLoading && !isHidden) {
+      onClick()
+    }
+  }
+
   return (
-    <Box position='relative' display='inline-flex' {...chakra}>
+    <Box position='relative' display='inline-flex' data-testid='root' {...chakra}>
       <Button
         size='xs'
         borderRadius='sm'
         visibility={isLoading || isHidden ? 'hidden' : 'visible'}
-        onClick={onClick}
+        onClick={handleClick}
         data-testid='button'
         {...buttonChakra}
       >
