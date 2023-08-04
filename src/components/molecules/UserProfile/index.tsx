@@ -18,7 +18,7 @@ export const UserProfile: FC<UserProfileProps> = memo(function UserProfile({
   return (
     <Flex w='100%' pt='50px' pb='50px' px='3' mx='auto' {...(chakra || {})}>
       {isLoading && (
-        <Flex alignItems='center'>
+        <Flex alignItems='center' data-testid='skeleton'>
           <Skeleton w='92px' h='92px' />
           <SkeletonText noOfLines={1} mt='4' />
         </Flex>
@@ -35,7 +35,7 @@ export const UserProfile: FC<UserProfileProps> = memo(function UserProfile({
               boxShadow: 'sm',
             }}
           />
-          <Box fontSize='lg' ml='4'>
+          <Box fontSize='lg' ml='4' data-testid='user-name'>
             {user?.personaName || ''}
           </Box>
         </Flex>

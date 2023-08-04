@@ -68,11 +68,11 @@ export const UserSearchForm: FC<UserSearchFormProps> = memo(function UserSearchF
 
           <Popover>
             <PopoverTrigger>
-              <Flex as='button' type='button' aria-label='Steam IDとは' mb='2'>
+              <Flex as='button' type='button' aria-label='Steam IDとは' mb='2' data-testid='help'>
                 <QuestionIcon />
               </Flex>
             </PopoverTrigger>
-            <PopoverContent>
+            <PopoverContent data-testid='popover-content'>
               <PopoverArrow />
               <PopoverCloseButton />
               <PopoverHeader>Steam IDとは</PopoverHeader>
@@ -96,11 +96,13 @@ export const UserSearchForm: FC<UserSearchFormProps> = memo(function UserSearchF
           onChange={handleChangeInput}
         />
 
-        <FormErrorMessage>{errorMessage ? ERROR_MESSAGES[errorMessage] : ' '}</FormErrorMessage>
+        <FormErrorMessage data-testid='error-message'>
+          {errorMessage ? ERROR_MESSAGES[errorMessage] : ' '}
+        </FormErrorMessage>
       </FormControl>
 
       <Flex justifyContent='center' mt='6'>
-        <Button type='submit' colorScheme='teal'>
+        <Button type='submit' colorScheme='teal' data-testid='submit'>
           Search
         </Button>
       </Flex>

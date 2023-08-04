@@ -27,6 +27,7 @@ export const GameViewHeader: FC<GameViewHeaderProps> = memo(function GameViewHea
           width: '100%',
           height: 'auto',
         }}
+        data-testid='game-view-header-img'
       />
       <Fade in={isLoading}>
         <Skeleton
