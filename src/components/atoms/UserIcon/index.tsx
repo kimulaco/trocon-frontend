@@ -36,7 +36,7 @@ export const UserIcon: FC<UserIconProps> = memo(function UserIcon({
       data-testid='box'
       {...(chakra || {})}
     >
-      <Fade in={isLoading}>
+      <Fade in={isLoading} data-testid='skeleton-fade'>
         <Skeleton {...skeletonStyles} />
       </Fade>
       <img src={src} alt={alt || ''} data-testid='img' />

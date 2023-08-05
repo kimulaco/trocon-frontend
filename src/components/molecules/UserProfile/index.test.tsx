@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { UserProfile } from '.'
 
 const DUMMY_USER = {
@@ -21,7 +21,14 @@ describe('<UserProfile>', () => {
     expect(getByTestId('user-name').textContent).toBe(DUMMY_USER.personaName)
   })
 
-  // TODO: should render skeleton
+  // TODO: Enable this test. broken <SkeletonText>.
+  it.skip('should show skeleton if isLoading is true', async () => {
+    const { getByTestId } = render(<UserProfile isLoading />)
+    const skeleton = getByTestId('skeleton-fade')
+    await waitFor(() => {
+      expect(skeleton.style.opacity).toBe('0')
+    })
+  })
 
   it('should usable chakra prop', async () => {
     const { container } = render(<UserProfile chakra={{ mt: '100px' }} />)

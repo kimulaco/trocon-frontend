@@ -16,7 +16,7 @@ export type GameTrophyProgressProps = {
 export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function GameTrophyProgress({
   trophies = [],
   isLoading,
-  chakra = {},
+  chakra,
 }: GameTrophyProgressProps) {
   const unlockedTrophies = useMemo<Trophy[]>(() => {
     return getUnlockedTrophies(trophies)
@@ -33,8 +33,8 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function Gam
     <Flex w='100%' alignItems='center' {...(chakra || {})}>
       {isLoading && (
         <>
-          <Skeleton w='100%' h='14px' />
-          <Skeleton minW='104px' h='14px' ml='2' />
+          <Skeleton w='100%' h='14px' data-testid='skeleton' />
+          <Skeleton minW='104px' h='14px' ml='2' data-testid='skeleton' />
         </>
       )}
 

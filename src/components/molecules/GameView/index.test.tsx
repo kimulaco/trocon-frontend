@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { GameView } from '.'
 import { complatedGame } from '@/mock/data/game'
 
@@ -49,5 +49,14 @@ describe('<GameView>', () => {
     expect(title.tagName).toBe('H3')
   })
 
-  // TODO: should render skeleton
+  // TODO: Enable this test. broken <SkeletonText>.
+  it.skip('should show skeleton if isLoading is true', async () => {
+    const { getByTestId } = render(<GameView isLoading />)
+    const skeletonHeader = getByTestId('skeleton-fade-header')
+    const skeletonMeta = getByTestId('skeleton-fade-meta')
+    await waitFor(() => {
+      expect(skeletonHeader.style.opacity).toBe('0')
+      expect(skeletonMeta.style.opacity).toBe('0')
+    })
+  })
 })

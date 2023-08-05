@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render } from '@testing-library/react'
 import { AppHeader } from '.'
 
 describe('<AppHeader>', () => {
   it('should show img src', async () => {
-    render(<AppHeader />)
+    const { getByTestId } = render(<AppHeader />)
 
-    const title = screen.getByTestId('title')
+    const title = getByTestId('title')
     expect(title.getAttribute('href')).toBe('/')
     expect(title.textContent).toBe('Trocon')
   })

@@ -38,7 +38,7 @@ export const BaseButton: FC<BaseButtonProps> = memo(function BaseButton({
         {children}
       </Button>
 
-      <Fade in={isLoading} data-testid='fade'>
+      <Fade in={isLoading} data-testid='skeleton-fade'>
         <Skeleton w='100%' h='100%' position='absolute' top='0' left='0' borderRadius='sm' />
       </Fade>
     </Box>

@@ -1,6 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { BaseButton } from '.'
+
+const handleClick = vi.fn()
 
 describe('<BaseButton>', () => {
   beforeEach(() => {
@@ -8,56 +10,61 @@ describe('<BaseButton>', () => {
   })
 
   it('should show children', async () => {
-    render(<BaseButton>Button Text</BaseButton>)
-    expect(screen.getByTestId('button').textContent).toBe('Button Text')
+    const { getByTestId } = render(<BaseButton>Button Text</BaseButton>)
+    expect(getByTestId('button').textContent).toBe('Button Text')
   })
 
   it('should use chakra prop', async () => {
-    render(<BaseButton chakra={{ mt: '100px' }}>Button Text</BaseButton>)
-    expect(getComputedStyle(screen.getByTestId('root')).marginTop).toBe('100px')
+    const { getByTestId } = render(<BaseButton chakra={{ mt: '100px' }}>Button Text</BaseButton>)
+    expect(getComputedStyle(getByTestId('root')).marginTop).toBe('100px')
   })
 
   it('should use buttonChakra prop', async () => {
-    render(<BaseButton buttonChakra={{ mt: '100px' }}>Button Text</BaseButton>)
-    expect(getComputedStyle(screen.getByTestId('button')).marginTop).toBe('100px')
+    const { getByTestId } = render(
+      <BaseButton buttonChakra={{ mt: '100px' }}>Button Text</BaseButton>,
+    )
+    expect(getComputedStyle(getByTestId('button')).marginTop).toBe('100px')
   })
 
   it('should call onClick when click button', async () => {
-    const handleClick = vi.fn()
-    render(<BaseButton onClick={handleClick}>Button Text</BaseButton>)
-    screen.getByTestId('button').click()
+    const { getByTestId } = render(<BaseButton onClick={handleClick}>Button Text</BaseButton>)
+    getByTestId('button').click()
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
   it('should be hidden if isHidden is true', async () => {
-    const handleClick = vi.fn()
-    render(
+    const { getByTestId } = render(
       <BaseButton isHidden onClick={handleClick}>
         Button Text
       </BaseButton>,
     )
-    const button = screen.getByTestId('button')
+    const button = getByTestId('button')
     expect(getComputedStyle(button).visibility).toBe('hidden')
+
+    const skeleton = getByTestId('skeleton-fade')
+    await waitFor(() => {
+      expect(skeleton.style.opacity).toBe('0')
+    })
 
     button.click()
     expect(handleClick).toHaveBeenCalledTimes(0)
-
-    // TODO: check to hide skeleton
   })
 
-  it('should be hidden if isLoading is true', async () => {
-    const handleClick = vi.fn()
-    render(
+  it('should show skeleton if isLoading is true', async () => {
+    const { getByTestId } = render(
       <BaseButton isLoading onClick={handleClick}>
         Button Text
       </BaseButton>,
     )
-    const button = screen.getByTestId('button')
+    const button = getByTestId('button')
     expect(getComputedStyle(button).visibility).toBe('hidden')
+
+    const skeleton = getByTestId('skeleton-fade')
+    await waitFor(() => {
+      expect(skeleton.style.opacity).toBe('1')
+    })
 
     button.click()
     expect(handleClick).toHaveBeenCalledTimes(0)
-
-    // TODO: check to show skeleton
   })
 })

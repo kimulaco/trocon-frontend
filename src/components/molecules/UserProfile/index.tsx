@@ -18,7 +18,7 @@ export const UserProfile: FC<UserProfileProps> = memo(function UserProfile({
   return (
     <Flex w='100%' pt='50px' pb='50px' px='3' mx='auto' {...(chakra || {})}>
       {isLoading && (
-        <Flex alignItems='center' data-testid='skeleton'>
+        <Flex alignItems='center' data-testid='skeleton-fade'>
           <Skeleton w='92px' h='92px' />
           <SkeletonText noOfLines={1} mt='4' />
         </Flex>

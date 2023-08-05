@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 import { GameTrophyProgress } from '.'
 import { Trophy } from '@/types/steam'
 
@@ -64,7 +64,16 @@ describe('<GameTrophyProgress>', () => {
     })
   })
 
-  // TODO: should render skeleton
+  it('should show skeleton if isLoading is true', async () => {
+    const { getAllByTestId } = render(<GameTrophyProgress isLoading />)
+    const skeletons = getAllByTestId('skeleton')
+    expect(skeletons).toHaveLength(2)
+    waitFor(() => {
+      skeletons.forEach((skeleton) => {
+        expect(skeleton.style.opacity).toBe('1')
+      })
+    })
+  })
 
   it('should usable chakra prop', async () => {
     const { container } = render(<GameTrophyProgress chakra={{ mt: '100px' }} />)

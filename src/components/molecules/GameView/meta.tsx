@@ -30,7 +30,7 @@ export const GameViewMeta: FC<GameViewMetaProps> = memo(function GameViewMeta({
         </>
       ) : (
         <>
-          <SkeletonText noOfLines={1} mt={4} mb='13px' />
+          <SkeletonText noOfLines={1} mt={4} mb='13px' data-testid='skeleton-fade-meta' />
         </>
       )}
     </>
