@@ -18,13 +18,19 @@ export const GameViewMeta: FC<GameViewMetaProps> = memo(function GameViewMeta({
     <>
       {!isLoading ? (
         <>
-          <Heading fontSize='md' fontWeight='bold' as={titleTagName} wordBreak='break-word'>
+          <Heading
+            fontSize='md'
+            fontWeight='bold'
+            as={titleTagName}
+            wordBreak='break-word'
+            data-testid='game-view-meta-name'
+          >
             {name}
           </Heading>
         </>
       ) : (
         <>
-          <SkeletonText noOfLines={1} mt={4} mb='13px' />
+          <SkeletonText noOfLines={1} mt={4} mb='13px' data-testid='skeleton-fade-meta' />
         </>
       )}
     </>

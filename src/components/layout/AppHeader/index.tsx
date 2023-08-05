@@ -19,7 +19,7 @@ export const AppHeader: FC<AppHeaderProps> = memo(function AppHeader({ chakra }:
       >
         <Box as='h1' py='3' fontSize='2xl' fontWeight='bold'>
           <Flex py='1' alignItems='flex-end'>
-            <Link href='/'>
+            <Link href='/' data-testid='title'>
               <Box as='span' lineHeight='1'>
                 Trocon
               </Box>

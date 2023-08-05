@@ -24,7 +24,7 @@ export const UserIcon: FC<UserIconProps> = memo(function UserIcon({
   alt = '',
   size = '92px',
   isLoading = false,
-  chakra = {},
+  chakra,
 }: UserIconProps) {
   return (
     <Box
@@ -33,12 +33,13 @@ export const UserIcon: FC<UserIconProps> = memo(function UserIcon({
       borderRadius='md'
       overflow='hidden'
       position='relative'
+      data-testid='box'
       {...(chakra || {})}
     >
-      <Fade in={isLoading}>
+      <Fade in={isLoading} data-testid='skeleton-fade'>
         <Skeleton {...skeletonStyles} />
       </Fade>
-      <img src={src} alt={alt || ''} />
+      <img src={src} alt={alt || ''} data-testid='img' />
     </Box>
   )
 })

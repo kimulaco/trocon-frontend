@@ -11,7 +11,7 @@ export const HeadingText: FC<HeadingTextProps> = memo(function UserIcon({
   chakra = {},
 }: HeadingTextProps) {
   return (
-    <Heading mt={4} mb={4} fontSize='4xl' textAlign='center' {...chakra}>
+    <Heading mt={4} mb={4} fontSize='4xl' textAlign='center' data-testid='heading' {...chakra}>
       {children}
     </Heading>
   )

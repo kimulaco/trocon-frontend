@@ -11,13 +11,12 @@ export type GameTrophyProgressProps = {
   trophies?: Trophy[]
   isLoading?: boolean
   chakra?: ChakraProps
-  onClickButton?: () => void
 }
 
 export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function GameTrophyProgress({
   trophies = [],
   isLoading,
-  chakra = {},
+  chakra,
 }: GameTrophyProgressProps) {
   const unlockedTrophies = useMemo<Trophy[]>(() => {
     return getUnlockedTrophies(trophies)
@@ -34,15 +33,23 @@ export const GameTrophyProgress: FC<GameTrophyProgressProps> = memo(function Gam
     <Flex w='100%' alignItems='center' {...(chakra || {})}>
       {isLoading && (
         <>
-          <Skeleton w='100%' h='14px' />
-          <Skeleton minW='104px' h='14px' ml='2' />
+          <Skeleton w='100%' h='14px' data-testid='skeleton' />
+          <Skeleton minW='104px' h='14px' ml='2' data-testid='skeleton' />
         </>
       )}
 
       {!isLoading && (
         <>
           <Progress w='100%' h='14px' value={rate} colorScheme={rate >= 100 ? 'green' : 'blue'} />
-          <Box minW='104px' ml='2' fontSize='sm' textAlign='right' lineHeight={1} flexShrink={0}>
+          <Box
+            minW='104px'
+            ml='2'
+            fontSize='sm'
+            textAlign='right'
+            lineHeight={1}
+            flexShrink={0}
+            data-testid='label'
+          >
             {`${Math.floor(rate)}% (${unlockedTrophies.length}/${trophies.length})`}
           </Box>
         </>
