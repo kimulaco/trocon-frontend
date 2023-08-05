@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { render, waitFor } from '@testing-library/react'
 import { GameView } from '.'
-import { complatedGame } from '@/mock/data/game'
+import { complatedGame } from '@/mock/data/steam/game'
 
 describe('<GameView>', () => {
   it('should be correct to renderd game info', async () => {
