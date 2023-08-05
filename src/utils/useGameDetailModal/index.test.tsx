@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { render, renderHook, act, fireEvent } from '@testing-library/react'
 import { useGameDetailModal } from '.'
-import { complatedGame } from '@/mock/data/game'
+import { complatedGame } from '@/mock/data/steam/game'
 import { createDummyTropy } from '@/mock/data/steam/trophy'
 
 const testGame = {

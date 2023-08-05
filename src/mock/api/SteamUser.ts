@@ -1,5 +1,5 @@
 import { rest, ResponseResolver, RestRequest, PathParams, RestContext, DefaultBodyType } from 'msw'
-import { createUser, createGames } from '../data/steam'
+import { createUser, createGames } from '@/mock/data/steam/user'
 
 const NEXT_PUBLIC_API_PATH = process.env.NEXT_PUBLIC_API_PATH
 const NODE_ENV = process.env.NODE_ENV

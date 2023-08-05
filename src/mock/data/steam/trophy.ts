@@ -1,4 +1,4 @@
-import { complatedGame, zeroGame, halfGame, noGame, failedGame } from '@/mock/data/game'
+import { complatedGame, zeroGame, halfGame, noGame, failedGame } from '@/mock/data/steam/game'
 import { GameTrophy } from '@/types/steam'
 
 export const trophies: GameTrophy[] = [

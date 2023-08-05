@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { renderHook, act } from '@testing-library/react'
 import { useSteam } from '.'
-import { createUser, createGames } from '@/mock/data/steam'
+import { createUser, createGames } from '@/mock/data/steam/user'
 import { createDummyTropy } from '@/mock/data/steam/trophy'
 
 const USER = createUser()

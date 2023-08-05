@@ -1,5 +1,5 @@
 import { games } from './game'
-import { Game } from '../../types/steam'
+import { Game } from '@/types/steam'
 
 const GAME_LENGTH = 20
 

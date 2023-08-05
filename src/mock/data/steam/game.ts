@@ -1,4 +1,4 @@
-import { Game } from '../../types/steam'
+import { Game } from '@/types/steam'
 
 export const complatedGame: Game = {
   appId: 100,
