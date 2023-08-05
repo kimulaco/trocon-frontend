@@ -47,13 +47,20 @@ export const useGameDetailModal: UseGameDetailModal = () => {
       <Modal isOpen={isOpen} onClose={handleOnClose} isCentered scrollBehavior='inside'>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>{game?.name || ''}</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader data-testid='title'>{game?.name || ''}</ModalHeader>
+          <ModalCloseButton data-testid='close' />
           <ModalBody>
             {game && (
               <>
                 <Box mb={4}>
-                  <img src={game.headerImgUrl} alt='' width={460} height={215} loading='lazy' />
+                  <img
+                    src={game.headerImgUrl}
+                    alt=''
+                    width={460}
+                    height={215}
+                    loading='lazy'
+                    data-testid='img'
+                  />
                 </Box>
 
                 <GameTrophyProgress
@@ -70,9 +77,10 @@ export const useGameDetailModal: UseGameDetailModal = () => {
                         as='li'
                         alignItems='center'
                         mb={2}
+                        data-testid='trophy'
                       >
                         <Icon as={trophy.achieved ? RiCheckboxCircleFill : RiLock2Line} mr={2} />
-                        <Box>{trophy.name}</Box>
+                        <Box data-testid='trophy-name'>{trophy.name}</Box>
                       </Flex>
                     )
                   })}

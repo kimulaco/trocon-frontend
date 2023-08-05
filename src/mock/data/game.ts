@@ -54,3 +54,5 @@ export const failedGame: Game = {
   playtime: 447,
   rtimeLastPlayed: 1656596824,
 }
+
+export const games: Readonly<Game[]> = [complatedGame, zeroGame, halfGame, noGame, failedGame]

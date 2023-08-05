@@ -37,11 +37,7 @@ const ERROR_MESSAGES = {
   STEAM_USER_INTERNAL_ERROR: 'エラーが発生しました。',
 } as const
 
-const getErrorMessage = (errorCode: unknown): string => {
-  if (typeof errorCode !== 'string') {
-    return ERROR_MESSAGES.STEAM_USER_INTERNAL_ERROR
-  }
-
+const getErrorMessage = (errorCode: string): string => {
   if (errorCode in ERROR_MESSAGES) {
     // @ts-ignore
     return ERROR_MESSAGES[errorCode]
@@ -108,7 +104,7 @@ export const useSteam = (): UseSteamValues => {
       } catch (error) {
         errorState = {
           title: 'Error',
-          message: getErrorMessage((error as any)?.errorCode),
+          message: getErrorMessage(String((error as any)?.errorCode)),
         }
         logger.error(error)
       }
