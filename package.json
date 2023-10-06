@@ -8,7 +8,7 @@
   "packageManager": "pnpm@8.8.0",
   "scripts": {
     "dev": "next",
-    "dev:mock": "NEXT_PUBLIC_USE_MOCK=true next",
+    "dev:mock": "PORT=4000 NEXT_PUBLIC_USE_MOCK=true next",
     "build": "next build",
     "start": "next start",
     "lint": "pnpm run lint:format && pnpm run lint:type && pnpm run lint:es",
