@@ -25,6 +25,7 @@ export const createGames = (): Game[] => {
     const game = games[index % games.length]
     return {
       ...game,
+      name: `${game.name} ${index + 1}}`,
       appId: index,
     }
   })
