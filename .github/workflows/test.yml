@@ -42,11 +42,11 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm run test:unit:coverage
-      - uses: codecov/codecov-action@v3
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - uses: actions/upload-artifact@v3
         with:
-          files: ./.coverage_unit/coverage-final.json
+          name: coverage_unit
+          path: ./.coverage_unit/coverage-final.json
+          retention-days: 1
 
   e2e_test:
     timeout-minutes: 120
@@ -65,8 +65,33 @@ jobs:
       - run: pnpm exec playwright install --with-deps
       - run: pnpm run test:e2e
       - uses: actions/upload-artifact@v3
-        if: always()
         with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 30
+          name: coverage_e2e
+          path: ./.coverage_e2e/coverage-final.json
+          retention-days: 1
+
+  upload_coverage:
+    needs: [unit_test, e2e_test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+      - name: Download coverage_unit
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage_unit
+      - name: Download coverage_e2e
+        uses: actions/download-artifact@v3
+        with:
+          name: coverage_e2e
+      - run: pnpm run coverage-merge
+      - uses: codecov/codecov-action@v3
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        with:
+          files: ./.coverage.json
+          flags: unit
