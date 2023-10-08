@@ -12,7 +12,7 @@ export default defineConfig({
     coverage: {
       all: true,
       include: ['src/**/*.{ts,tsx,js,jsx}'],
-      exclude: ['src/**/*.d.ts', 'src/mock/**/*.ts'],
+      exclude: ['src/**/*.d.ts', 'src/pages/**/*.tsx', 'src/mock/**/*.ts'],
     },
   },
   resolve: {
