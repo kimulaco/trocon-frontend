@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from 'playwright-test-coverage'
 import { createUser, createGames } from '@/mock/data/steam/user'
 
 const TEST_STEAM_ID = '12345678901234567'

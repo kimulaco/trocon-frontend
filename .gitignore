@@ -7,6 +7,11 @@
 
 # testing
 /coverage
+/.coverage
+/.coverage_e2e
+/.coverage_unit
+/.next_e2e
+/.nyc_output
 
 # next.js
 /.next/

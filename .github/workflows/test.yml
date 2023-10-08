@@ -46,7 +46,7 @@ jobs:
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
-          files: ./coverage/coverage-final.json
+          files: ./.coverage_unit/coverage-final.json
 
   e2e_test:
     timeout-minutes: 120

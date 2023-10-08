@@ -23,7 +23,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'pnpm run dev:mock',
+    command: process.env.E2E_COVERAGE ? 'pnpm run dev:e2e:coverage' : 'pnpm run dev:mock',
     url: TEST_URL,
     reuseExistingServer: !process.env.CI,
     stdout: 'ignore',

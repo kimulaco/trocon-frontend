@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect } from 'playwright-test-coverage'
 
 test('should display title when /404', async ({ page }) => {
   await page.goto('/404')

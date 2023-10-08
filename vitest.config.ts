@@ -13,6 +13,7 @@ export default defineConfig({
       all: true,
       include: ['src/**/*.{ts,tsx,js,jsx}'],
       exclude: ['src/**/*.d.ts', 'src/mock/**/*.ts'],
+      reportsDirectory: '.coverage_unit',
     },
   },
   resolve: {
