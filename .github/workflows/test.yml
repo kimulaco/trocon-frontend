@@ -63,7 +63,7 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm exec playwright install --with-deps
-      - run: pnpm run test:e2e
+      - run: pnpm run test:e2e:coverage
       - uses: actions/upload-artifact@v3
         with:
           name: coverage_e2e
