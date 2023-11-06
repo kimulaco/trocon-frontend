@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { rest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import { server } from '@/mock/server'
 import { typedFetch } from '.'
 
@@ -14,7 +14,7 @@ const RESPONSE_200: Response = {
 }
 
 const RESPONSE_500: Response = {
-  statusCode: 200,
+  statusCode: 500,
   success: false,
   message: 'Internal Server Error',
 }
@@ -22,8 +22,8 @@ const RESPONSE_500: Response = {
 describe('typedFetch', () => {
   it('slould fetch when status 200', async () => {
     server.use(
-      rest.get(`${API_BASE_URL}/api/test/200`, (_, res, ctx) => {
-        return res(ctx.status(200), ctx.json<Response>(RESPONSE_200))
+      http.get(`${API_BASE_URL}/api/test/200`, () => {
+        return HttpResponse.json(RESPONSE_200)
       }),
     )
 
@@ -33,8 +33,10 @@ describe('typedFetch', () => {
 
   it('slould throw error when status 500', async () => {
     server.use(
-      rest.get(`${API_BASE_URL}/api/test/500`, (_, res, ctx) => {
-        return res(ctx.status(500), ctx.json<Response>(RESPONSE_500))
+      http.get(`${API_BASE_URL}/api/test/500`, () => {
+        return HttpResponse.json(RESPONSE_500, {
+          status: RESPONSE_500.statusCode,
+        })
       }),
     )
 
